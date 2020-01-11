@@ -3,27 +3,25 @@ import { Button, Card, Statistic } from "semantic-ui-react";
 
 import "./App.css";
 
+// Local State を定義しておく
 interface AppState {
   count: number;
 }
 
 class App extends Component<{}, AppState> {
+  // 1 つ目が Props で、 2 つ目が Local State
   constructor(props: {}) {
     super(props);
-    this.state = { count: 0 };
+    this.state = { count: 0 }; // Local State の初期化が必要
   }
 
-  increment() {
-    this.setState(prevState => ({
-      count: prevState.count + 1
-    }));
-  }
+  // State の更新は必ず this.setState を使う
+  increment = () => this.setState(prevState => ({ count: prevState.count + 1 }));
 
-  decrement() {
-    this.setState(prevState => ({
-      count: prevState.count - 1
-    }));
-  }
+  // setState の引数は、 以下のいずれか
+  // 1. 設定したい値の State オブジェクト
+  // 2. (prevState, props) => newState 形式の、State と Props を受け取って新しい State を返す関数
+  decrement = () => this.setState(prevState => ({ count: prevState.count - 1 }));
 
   render() {
     const { count } = this.state;
@@ -40,10 +38,10 @@ class App extends Component<{}, AppState> {
           </Statistic>
           <Card.Content>
             <div className="ui two buttons">
-              <Button color="red" onClick={() => this.decrement()}>
+              <Button color="red" onClick={this.decrement}>
                 -1
               </Button>
-              <Button color="green" onClick={() => this.increment()}>
+              <Button color="green" onClick={this.increment}>
                 +1
               </Button>
             </div>
