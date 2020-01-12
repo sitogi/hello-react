@@ -22,7 +22,7 @@ class CharacterList extends Component<CharacterListProps> {
         <Header as="h2">{school}</Header>
         <Item.Group>
           {characters.map(c => (
-            <Item>
+            <Item key={c.id}>
               <Icon name="user circle" size="huge" />
               <Item.Content>
                 <Item.Header>{c.name}</Item.Header>
