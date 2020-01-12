@@ -1,9 +1,13 @@
 import React, { FC, useState } from "react";
-import { Button, Card, Statistic } from "semantic-ui-react";
+import { Button, Card, Divider, Icon, Statistic } from "semantic-ui-react";
+import Helment from "react-helmet";
+import { RouteComponentProps, withRouter } from "react-router";
 
 import "./App.css";
 
-const ClickCounter: FC = () => {
+type AppProps = {} & RouteComponentProps;
+
+const ClickCounter: FC<AppProps> = ({ history }) => {
   // State Hook。CC の Local State に相当するものを FC で使えるようにする機能
   // useState は state 変数とそのセッター関数を返す
   // const と setCount の名前は自由に変更できる
@@ -14,6 +18,9 @@ const ClickCounter: FC = () => {
 
   return (
     <div className="container">
+      <Helment>
+        <title>Counter</title>
+      </Helment>
       <header>
         <h1>Counter</h1>
       </header>
@@ -33,8 +40,19 @@ const ClickCounter: FC = () => {
           </div>
         </Card.Content>
       </Card>
+      <Divider hidden />
+      <Button
+        basic
+        color="grey"
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        <Icon name="home" />
+        ホームへ
+      </Button>
     </div>
   );
 };
 
-export default ClickCounter;
+export default withRouter(ClickCounter);
